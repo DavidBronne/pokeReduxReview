@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
+import Pokeball from '../pokeball.png';
 
 class Home extends Component {
     
@@ -24,8 +25,9 @@ class Home extends Component {
                         return (
                             <div className="post card" key={post.id}>
                                 <div className="card-content">
+                                    <img src={Pokeball} alt="A Pokeball"/>
                                     <NavLink to={'/' + post.id}>
-                                        <div className="card-title">{post.title}</div>
+                                        <div className="card-title red-text">{post.title}</div>
                                     </NavLink>
                                     <p>{post.body}</p>
                                 </div>
@@ -37,7 +39,7 @@ class Home extends Component {
             )
 
         return (
-            <div className="container">
+            <div className="container home">
                 <h4 className="center">Home</h4>
                 {postList}
             </div>
