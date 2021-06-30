@@ -2,14 +2,23 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 class Post extends Component {
-    
+    handleClick = () => {
+        this.props.deletePost(this.props.post.id);
+        this.props.history.push('/')
+    }
 
     render() {
+        console.log(`this.props`, this.props)
         const {post} = this.props
         const postDetail = post ? (
             <div className="post">
                 <h4 className="center">{post.title}</h4>
                 <p>{post.body}</p>
+                <div className="center">
+                    <button className="btn grey" onClick={this.handleClick}>
+                        delete post
+                    </button>
+                </div>
             </div>
         ) : (
             <div className="center">Post Lodading... </div>
@@ -27,4 +36,10 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export default connect(mapStateToProps)(Post)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deletePost: (id) => {dispatch({type:"DELETE_POST", id:id})}
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Post)
