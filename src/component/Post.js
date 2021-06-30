@@ -1,22 +1,35 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 class Post extends Component {
     
     state = {
-        id:null
+        post:null
     }
 
     componentDidMount() {
-        this.setState(
-            {id:this.props.match.params.post_id}
-        ) 
+        const id = this.props.match.params.post_id
+        axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
+         .then((res) => {
+             console.log('res :>> ', res);
+             this.setState(
+                 {post:res.data}
+             )
+         })
     }
 
     render() {
-        const {id} = this.state
-        console.log('id :>> ', id);
+        const {post} = this.state
+        const postDetail = post ? (
+            <div className="post">
+                <h4 className="center">{post.title}</h4>
+                <p>{post.body}</p>
+            </div>
+        ) : (
+            <div className="center">Post Lodading... </div>
+        )
         return(
-            <h4>{id}</h4>
+            <div className="container">{postDetail}</div>
         )
     }
 }

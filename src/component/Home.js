@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {NavLink} from 'react-router-dom'
 
 class Home extends Component {
     
@@ -23,7 +24,9 @@ class Home extends Component {
                         return (
                             <div className="post card" key={post.id}>
                                 <div className="card-content">
-                                    <div className="card-title">{post.title}</div>
+                                    <NavLink to={'/' + post.id}>
+                                        <div className="card-title">{post.title}</div>
+                                    </NavLink>
                                     <p>{post.body}</p>
                                 </div>
                             </div>
